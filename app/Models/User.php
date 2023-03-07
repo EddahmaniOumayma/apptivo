@@ -20,24 +20,11 @@ class User extends Authenticatable
      */
     /**
      *  $table->id();
+     * 
+     *
 
      */
-    protected $fillable = [
-
-       'nom',
-       'prenom',
-       'email',
-       'date_naissance',
-       'lieu_naissance',
-       'sexe',
-       'image',
-       'tel',
-       'cin',
-       'date_ambauche',
-       'situation_familial',
-       'Nbr_enfants',
-       'status',
-    ];
+    protected $guarded = [];
     //users:  {  'nom','prenom','date_naissance','lieu_naissance','sex',
     //'image','tel','cin','date_ambauche','situation_familial','Nbr_enfants','status',}
 

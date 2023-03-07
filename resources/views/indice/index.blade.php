@@ -9,7 +9,7 @@
 <body>
     
     <a class="btn btn-primary  sm" href="{{ route('indices.create') }}">Ajouter</a>
-    <table class="table table-bordred ">
+    <table class="table table-bordred " border="1">
         <thead>
           <tr>
             <th scope="col">id</th>

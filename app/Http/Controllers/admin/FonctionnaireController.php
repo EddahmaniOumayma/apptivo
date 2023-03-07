@@ -3,8 +3,16 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cadre;
+use App\Models\Corp;
+use App\Models\Grade;
+use App\Models\User;
+use App\Models\Indice;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class FonctionnaireController extends Controller
 {
@@ -34,7 +42,8 @@ class FonctionnaireController extends Controller
             ->join('corps', 'cadres.corp_id', '=', 'corps.id')
             ->get();
         
-            return view("admin.pages.index",compact('data'));
+            return view("admin.index",compact('data'));
+         
     }
 
 
@@ -45,7 +54,12 @@ class FonctionnaireController extends Controller
      */
     public function create()
     {
-        //
+        $corps = Corp::all();
+        $cadres=Cadre::all();
+        $grades=Grade::all();
+        $indices=Indice::all();
+
+        return View('admin.pages.ajouter',compact('corps','cadres','grades','indices'));
     }
 
     /**
@@ -56,7 +70,71 @@ class FonctionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        dd($request->all());
+        $rules = [
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|unique:fonctionnaires,email',
+            'date_naissance' => 'required|date',
+            'lieu_naissance' => 'required|string|max:255',
+            'sexe' => 'required|in:0,1',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tel' => 'required|string',
+            'cin' => 'required|string|max:255|unique:fonctionnaires,cin',
+            'date_ambauche' => 'required|date',
+            'situation_familial' => 'required|string|max:255',
+            'Nbr_enfants' => 'nullable|integer|min:0',
+            'password' => 'required|string|min:8|max:255',
+            'corp' => 'required|string|max:255',
+            'cadre' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'indice' => 'required|string|max:255',
+            'role' => 'required|in:Admin,Fonctionnaire',
+    
+        ];
+
+    
+    $validator = Validator::make($request->all(),$rules);
+    if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+    
+    // Create user
+    $user = new User;
+    $user->nom = $request->input('nom');
+    $user->prenom = $request->input('prenom');
+    $user->email = $request->input('email');
+    $user->date_naissance = $request->input('date_naissance');
+    $user->lieu_naissance = $request->input('lieu_naissance');
+    $user->sexe = $request->input('sexe');
+    $user->tel = $request->input('tel');
+    $user->cin = $request->input('cin');
+    $user->date_ambauche = $request->input('date_ambauche');
+    $user->situation_familial = $request->input('situation_familial');
+    $user->Nbr_enfants = $request->input('Nbr_enfants');
+    $user->password = Hash::make($request->input('password'));
+    $user->save();
+    
+    // Create indice_user pivot record
+    $indice = Indice::where('libelle', $request->input('indice'))->firstOrFail();
+    $user->indices()->attach($indice->id);
+    
+    
+    // Redirect to user profile page Here
+          
+
+       
+
+       
+
+
+      
+        return redirect()->route('fonctionnaires.index');
+        
     }
 
     /**
@@ -67,7 +145,16 @@ class FonctionnaireController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = DB::table('users')
+        ->join('indice_users', 'users.id', '=', 'indice_users.user_id')
+        ->join('indices', 'indice_users.indice_id', '=', 'indices.id')
+        ->join('grades', 'indices.grade_id', '=', 'grades.id')
+        ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
+        ->join('corps', 'cadres.corp_id', '=', 'corps.id')
+        ->where('users.id', $id)
+        ->first();
+
+   dd($user);
     }
 
     /**

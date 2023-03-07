@@ -8,9 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!----======== CSS ======== -->
-  <link rel="stylesheet" href="{{asset('css/chart.css')}}" />
   <link rel="stylesheet" href="{{asset('css/style.css')}}" />
-
+  <link rel="stylesheet"  href="{{asset('css/chart.css')}}"   />
 
   <!----===== Boxicons CSS ===== -->
   <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
@@ -24,7 +23,7 @@
   <nav class="sidebar close">
     <header>
       <div class="image">
-        <img src="./logo.png" />
+        <img src="img/logo.png" />
       </div>
       <div>
         <a href="#" style="color: #002257">
@@ -107,13 +106,14 @@
       <div class="analytic add a2">
         <div class="float">
           <div class="admin_pro">
-            <img src="./wallpaperflare.com_wallpaper (8).jpg" alt="">
+            <img src="img/wallpaperflare.com_wallpaper (8).jpg" alt="">
             <h4 class="title">nom & prenom </h4>
           </div>
 
           <div class="btn">
             <button>
-              <a href="#">Ajouter <i class="material-symbols-outlined"> person_add </i></a>
+              <a href="{{route('fonctionnaires.create')}}">Ajouter <i class="material-symbols-outlined"> 
+                person_add </i></a>
             </button>
           </div>
         </div>
@@ -125,16 +125,18 @@
     <div class="fonc_box">
       <div class="list">
         <ul>
-
+          
+         @foreach ($data as $fonctionnaire)
           <li>
             <div class="in">
-            <img src="./wallpaperflare.com_wallpaper (8).jpg" />
-              <h4 class="title">Nom & prenom</h4>
+            <img src="img/wallpaperflare.com_wallpaper (8).jpg" />
+              <h4 class="title"> {{$fonctionnaire->nom}} {{$fonctionnaire->prenom}}</h4>
             </div>
-            <h4 class="title pd">AD</h4>
-            <a href="#">Info</a>
+            <h4 class="title pd"> {{$fonctionnaire->libelle}} </h4>
+            <a href=" {{route('fonctionnaires.show',$fonctionnaire->id)}} ">Info</a>
           </li>
           <hr />
+          @endforeach
 
         </ul>
       </div>
