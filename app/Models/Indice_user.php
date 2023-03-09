@@ -8,17 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Indice_user extends Model
 {
     use HasFactory;
-    protected $table='indice_users';
+    protected $table='indice_user';
    
     protected $fillable = [
 
-        'date',
         'indice_id',
         'user_id',
  
    
      ];
-
+     
 
 
 

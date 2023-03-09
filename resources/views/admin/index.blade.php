@@ -72,15 +72,28 @@
           </li>
         </ul>
       </div>
+      
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
 
-      <div class="bottom-content">
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    </div>
+
+      {{-- <div class="bottom-content">
         <li class="">
           <a href="#">
             <i style="color: #ff003b" class="material-symbols-outlined">
               logout</i>
             <span class="text nav-text">Logout</span>
           </a>
-        </li>
+        </li> --}}
 
         <li class="mode">
           <div class="sun-moon">

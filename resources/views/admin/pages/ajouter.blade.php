@@ -103,7 +103,7 @@
 
      <h2 class="title pp">Ajouter fonctionnaire</h2>
  
-    <form class="add" method="POST" action=" {{route("fonctionnaires.store")}} ">
+    <form class="add" method="POST" action=" {{route("fonctionnaires.store")}} " enctype="multipart/form-data">
       @csrf
       <div class="s1">
 
@@ -200,8 +200,10 @@
   
          <label for="role">Roles :</label>
          <select class="input" id="role" name="role">
-             <option value="Admin">Admin</option>
-             <option value="Fonctionnaire">Fonctionnaire</option>
+          @foreach( $roles as $role)
+
+          <option value=" {{$role->id}} "> {{$role->name}} </option>
+          @endforeach
             
          </select>
          <center><button type="submit" class="sub" >Ajouter</button></center>

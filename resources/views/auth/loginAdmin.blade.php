@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{asset('/css/loginF.css')}}">
+    <link rel="stylesheet" href="/css/style3.css">
 </head>
 
 <body>
     <div class="login">
         <div class="part1">
             <center>
-                <h1 class="title">Bienvenu</h1>
+                <h1 class="title">Espace Admin</h1>
             </center>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -73,10 +73,7 @@
                 </div>
             </form>
         </div>
-        <div class="part2">
-
-        </div>
-    </div>
+       
 </body>
 
 </html>

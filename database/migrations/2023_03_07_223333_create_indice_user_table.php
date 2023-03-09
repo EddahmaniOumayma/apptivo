@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('indice_users', function (Blueprint $table) {
+        Schema::create('indice_user', function (Blueprint $table) {
             $table->id();
-          
-            $table->date('date');
-            
+                      
             $table->unsignedBigInteger('indice_id')->unsigned();
             $table->foreign('indice_id')->references('id')->on('indices')->onDelete('cascade');
 
@@ -26,13 +24,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-        //users:  {  'nom','prenom','date_naissance','lieu_naissance','sex',
-       //'image','tel','cin','date_ambauche','situation_familial','Nbr_enfants','status',}
-       //corps :{libelle}
-       //cadres :{libelle_c,corp_id}
-       //grades :{libelle_g,salaire_de_base ,besoin_concours,cadre_id}
-       //indices :{libelle_i,grade_id}
-       //indice_users :{date,indice_id,user_id}
 
     /**
      * Reverse the migrations.
@@ -41,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indice_users');
+        Schema::dropIfExists('indice_user');
     }
 };

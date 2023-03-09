@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class FonctionnaireController extends Controller
 {
@@ -23,6 +24,7 @@ class FonctionnaireController extends Controller
      */
     public function index()
     {  
+      ; 
       
             //users:  {  'nom','prenom','date_naissance','lieu_naissance','sex',
             //'image','tel','cin','date_ambauche','situation_familial','Nbr_enfants','status',}
@@ -35,14 +37,15 @@ class FonctionnaireController extends Controller
 
 
         $data = DB::table('users')
-            ->join('indice_users', 'users.id', '=', 'indice_users.user_id')
-            ->join('indices', 'indice_users.indice_id', '=', 'indices.id')
+            ->join('indice_user', 'users.id', '=', 'indice_user.user_id')
+            ->join('indices', 'indice_user.indice_id', '=', 'indices.id')
             ->join('grades', 'indices.grade_id', '=', 'grades.id')
             ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
             ->join('corps', 'cadres.corp_id', '=', 'corps.id')
             ->get();
-        
+             
             return view("admin.index",compact('data'));
+        
          
     }
 
@@ -58,8 +61,9 @@ class FonctionnaireController extends Controller
         $cadres=Cadre::all();
         $grades=Grade::all();
         $indices=Indice::all();
+        $roles=Role::all();
 
-        return View('admin.pages.ajouter',compact('corps','cadres','grades','indices'));
+        return View('admin.pages.ajouter',compact('corps','cadres','grades','indices','roles'));
     }
 
     /**
@@ -70,38 +74,53 @@ class FonctionnaireController extends Controller
      */
     public function store(Request $request)
     {
-
-        dd($request->all());
+        
+        
         $rules = [
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|email|unique:fonctionnaires,email',
+            'email' => 'required|email|unique:users,email',
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
             'sexe' => 'required|in:0,1',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|max:2048',
             'tel' => 'required|string',
-            'cin' => 'required|string|max:255|unique:fonctionnaires,cin',
+            'cin' => 'required|string|max:255|unique:users,cin',
             'date_ambauche' => 'required|date',
             'situation_familial' => 'required|string|max:255',
             'Nbr_enfants' => 'nullable|integer|min:0',
             'password' => 'required|string|min:8|max:255',
-            'corp' => 'required|string|max:255',
-            'cadre' => 'required|string|max:255',
-            'grade' => 'required|string|max:255',
-            'indice' => 'required|string|max:255',
-            'role' => 'required|in:Admin,Fonctionnaire',
+            'corp_id' => 'required',
+            'cadre_id' => 'required',
+            'grade_id' => 'required',
+            'indice_id' => 'required',
+            'role' => 'required',
     
         ];
 
     
     $validator = Validator::make($request->all(),$rules);
     if ($validator->fails()) {
+    
             return redirect()
                 ->back()
                 ->withErrors($validator)
                 ->withInput();
         }
+
+
+            // 1. Get the image data from the request
+            $imageData = $request->file('image');
+
+            if($imageData)
+            {
+                $filename = uniqid() . '.' . $imageData->extension();
+                $path = $imageData->storeAs('images/users', $filename, 'public');
+            }
+
+
+
+
     
     // Create user
     $user = new User;
@@ -112,6 +131,7 @@ class FonctionnaireController extends Controller
     $user->lieu_naissance = $request->input('lieu_naissance');
     $user->sexe = $request->input('sexe');
     $user->tel = $request->input('tel');
+    $user->image =$path;
     $user->cin = $request->input('cin');
     $user->date_ambauche = $request->input('date_ambauche');
     $user->situation_familial = $request->input('situation_familial');
@@ -120,20 +140,22 @@ class FonctionnaireController extends Controller
     $user->save();
     
     // Create indice_user pivot record
-    $indice = Indice::where('libelle', $request->input('indice'))->firstOrFail();
-    $user->indices()->attach($indice->id);
+    $indice = Indice::where('id', $request->input('indice_id'))->firstOrFail();
+
+    $now = now();
+    $user->indice()->attach($indice->id,['created_at' => $now]);
     
     
     // Redirect to user profile page Here
+    return redirect()->route('fonctionnaires.index');
           
 
+    
        
 
        
 
 
-      
-        return redirect()->route('fonctionnaires.index');
         
     }
 
