@@ -110,4 +110,7 @@ class CorpController extends Controller
         $corp->delete();
         return redirect()->route('corps.index');
     }
+     public function management(){
+        return view('admin.pages.cate');
+     }
 }

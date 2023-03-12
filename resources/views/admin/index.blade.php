@@ -119,8 +119,8 @@
       <div class="analytic add a2">
         <div class="float">
           <div class="admin_pro">
-            <img src="img/wallpaperflare.com_wallpaper (8).jpg" alt="">
-            <h4 class="title">nom & prenom </h4>
+            <img src="{{asset('storage/'.auth()->user()->image)}}" alt="">
+            <h4 class="title"> {{auth()->user()->nom}}  {{auth()->user()->prenom}}</h4>
           </div>
 
           <div class="btn">
@@ -140,16 +140,20 @@
         <ul>
           
          @foreach ($data as $fonctionnaire)
+         {{-- @dd($data); --}}
           <li>
             <div class="in">
-            <img src="img/wallpaperflare.com_wallpaper (8).jpg" />
+            <img src="{{asset('storage/'.$fonctionnaire->image)}}" />
               <h4 class="title"> {{$fonctionnaire->nom}} {{$fonctionnaire->prenom}}</h4>
             </div>
             <h4 class="title pd"> {{$fonctionnaire->libelle}} </h4>
             <a href=" {{route('fonctionnaires.show',$fonctionnaire->id)}} ">Info</a>
           </li>
+
           <hr />
           @endforeach
+
+          {{$data->links()}}
 
         </ul>
       </div>

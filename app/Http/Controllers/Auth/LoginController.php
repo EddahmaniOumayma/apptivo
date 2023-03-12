@@ -29,10 +29,7 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-     public function showAdminLoginForm()
-{
-    return view('auth.loginAdmin');
-}
+
 
 
 
@@ -42,20 +39,18 @@ public function authenticated(Request $request)
 
     $user = User::where('email', $user_email)->first();
 
-    dd($user->role);
-
-    // if ($user) {
-    //     if ($user->hasRole('admin')) {
-    //         return redirect('/admin/index');
-    //     } else {
-    //         return redirect('/user/index');
-    //     }
-    // }
+    if ($user) {
+        if ($user->hasRole('Admin')) {
+            return redirect()->route('fonctionnaires.index');
+        } else {
+            return redirect()->route('home');
+        }
+    }
 }
 
 
 
-    }
+    
 
     /**
      * Create a new controller instance.

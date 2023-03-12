@@ -36,15 +36,19 @@ class FonctionnaireController extends Controller
 
 
 
-        $data = DB::table('users')
+            $data = DB::table('users')
             ->join('indice_user', 'users.id', '=', 'indice_user.user_id')
             ->join('indices', 'indice_user.indice_id', '=', 'indices.id')
             ->join('grades', 'indices.grade_id', '=', 'grades.id')
             ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
             ->join('corps', 'cadres.corp_id', '=', 'corps.id')
-            ->get();
-             
+            // ->whereHas('roles', function ($query) {
+            //     $query->where('name', 'Fonctionnaire');
+            // })
+            ->paginate(5);
             return view("admin.index",compact('data'));
+
+
         
          
     }
@@ -167,16 +171,17 @@ class FonctionnaireController extends Controller
      */
     public function show($id)
     {
+       
         $user = DB::table('users')
-        ->join('indice_users', 'users.id', '=', 'indice_users.user_id')
-        ->join('indices', 'indice_users.indice_id', '=', 'indices.id')
+        ->join('indice_user', 'users.id', '=', 'indice_user.user_id')
+        ->join('indices', 'indice_user.indice_id', '=', 'indices.id')
         ->join('grades', 'indices.grade_id', '=', 'grades.id')
         ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
         ->join('corps', 'cadres.corp_id', '=', 'corps.id')
         ->where('users.id', $id)
         ->first();
 
-   dd($user);
+         return view('admin.pages.show',compact('user'));
     }
 
     /**
