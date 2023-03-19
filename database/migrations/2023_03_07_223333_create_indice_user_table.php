@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('indice_user', function (Blueprint $table) {
-            $table->id();
-                      
-            $table->unsignedBigInteger('indice_id')->unsigned();
-            $table->foreign('indice_id')->references('id')->on('indices')->onDelete('cascade');
 
-            $table->unsignedBigInteger('user_id')->unsigned();
+                      
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('indice_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('indice_id')->references('id')->on('indices')->onDelete('cascade');
+            $table->primary(['user_id', 'indice_id']);
             $table->timestamps();
-        });
+                });
     }
 
     /**

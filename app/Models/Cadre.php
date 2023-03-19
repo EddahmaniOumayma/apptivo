@@ -18,12 +18,12 @@ class Cadre extends Model
    
      ];
      public function corp()
-     {
-         return $this->belongsTo(Corp::class);
-     }
+    {
+        return $this->belongsTo(Corp::class);
+    }
 
 
-     public function grade()
+     public function grades()
      {
          return $this->hasMany(Grade::class);
      }
@@ -39,3 +39,4 @@ class Cadre extends Model
        //indices :{libelle_i,grade_id}
        //indice_users :{date,indice_id,user_id}
 
+      

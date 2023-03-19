@@ -140,20 +140,25 @@
         <ul>
           
          @foreach ($data as $fonctionnaire)
-         {{-- @dd($data); --}}
+
+         {{ $data[1]['indices'][0]['libelle_i'] }}
+         
           <li>
             <div class="in">
-            <img src="{{asset('storage/'.$fonctionnaire->image)}}" />
+            <img src="{{asset("storage/".$fonctionnaire->image)}}" />
               <h4 class="title"> {{$fonctionnaire->nom}} {{$fonctionnaire->prenom}}</h4>
-            </div>
-            <h4 class="title pd"> {{$fonctionnaire->libelle}} </h4>
+            </
+            @foreach($fonctionnaire['indices'] as $indice)
+            <h4 class="title pd">  {{ $indice['grade']->cadre->corp->libelle }}</h4>
+            @endforeach
+
             <a href=" {{route('fonctionnaires.show',$fonctionnaire->id)}} ">Info</a>
           </li>
 
           <hr />
           @endforeach
 
-          {{$data->links()}}
+          {{-- {{$data->links()}} --}}
 
         </ul>
       </div>

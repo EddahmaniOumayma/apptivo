@@ -17,10 +17,10 @@ protected $fillable = [
  ];
 
 
-public function cadre()
-{
-    return $this->hasMany(Cadre::class);
-}
+ public function cadres()
+ {
+     return $this->hasMany(Cadre::class);
+ }
 
 }
 

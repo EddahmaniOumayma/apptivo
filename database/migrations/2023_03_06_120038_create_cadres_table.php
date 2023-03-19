@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string("libelle_c");
             
-            $table->unsignedBigInteger('corp_id')->unsigned();
-            $table->foreign('corp_id')->references('id')->on('corps')->onDelete('cascade'); 
+            $table->unsignedBigInteger('corp_id');
+            $table->foreign('corp_id')->references('id')->on('corps')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('indices', function (Blueprint $table) {
             $table->id();
             $table->string('libelle_i')->unique();
-            $table->unsignedBigInteger('grade_id')->unsigned();
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade'); 
+            $table->unsignedBigInteger('grade_id');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->timestamps();
         });
     }

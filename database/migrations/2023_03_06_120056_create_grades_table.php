@@ -20,9 +20,9 @@ return new class extends Migration
             $table->boolean('besoin_concours')->default(true);
 
 
-            $table->unsignedBigInteger('cadre_id')->unsigned();
-            $table->foreign('cadre_id')->references('id')->on('cadres')->onDelete('cascade'); 
-
+            $table->unsignedBigInteger('cadre_id');
+            $table->foreign('cadre_id')->references('id')->on('cadres')->onDelete('cascade');
+        
             $table->timestamps();
         });
     }

@@ -106,7 +106,7 @@
 
      <div class="profile_fon">
       <img src="wallpaperflare.com_wallpaper (8).jpg" alt="">
-      <h3 class="title pp">{{$user->nom}}{{$user->prenom}}</h3>
+      <h3 class="title pp">{{$user[0]->nom}}{{$user[0]->prenom}}</h3>
      </div>
  
     <div class="add">
@@ -114,45 +114,47 @@
 
         <label for="nom">Nom & Prénom </label>
         <div class="input">
-          <h4 class="title center">{{$user->nom}}{{$user->prenom}}</h4>
+          <h4 class="title center">{{$user[0]->nom}}{{$user[0] ->prenom}}</h4>
         </div>
+        @foreach($user[0]['indices'] as $indice)
 
+    
         <label for="nom">Corp :</label>
         <div class="input">
-          <h4 class="title center">{{$user->libelle}}</h4>
+          <h4 class="title center">{{$indice['grade']->cadre->corp->libelle }}</h4>
         </div>
         <label for="nom">Cadre :</label>
         <div class="input">
-          <h4 class="title center">{{$user->libelle_c}}</h4>
+          <h4 class="title center">{{$indice['grade']->cadre->libelle_c}}</h4>
         </div>
         <label for="nom">Grade :</label>
         <div class="input">
-          <h4 class="title center">{{$user->libelle_g}}</h4>
+          <h4 class="title center">{{$indice['grade']->libelle_g }}</h4>
         </div>
         <label for="nom">Indice :</label>
         <div class="input">
-          <h4 class="title center">{{$user->libelle_i}}</h4>
+          <h4 class="title center">{{$indice->libelle_i}}</h4>
         </div>
-
+        @endforeach
         <label for="nom">Email :</label>
         <div class="input">
-          <h4 class="title center">{{$user->email}}</h4>
+          <h4 class="title center">{{$user[0]->email}}</h4>
         </div>
       </div>
         <div class="hr"></div>
         <div class="s2">
           <label for="nom">Date de Naissance :</label>
           <div class="input">
-            <h4 class="title center">{{$user->date_naissance}}</h4>
+            <h4 class="title center">{{$user[0]->date_naissance}}</h4>
           </div>
 
         <label for="nom">Tél :</label>
         <div class="input">
-          <h4 class="title center">{{$user->tel}}</h4>
+          <h4 class="title center">{{$user[0]->tel}}</h4>
         </div>
         <label for="nom">CNI :</label>
         <div class="input">
-          <h4 class="title center">{{$user->cin}}</h4>
+          <h4 class="title center">{{$user[0]->cin}}</h4>
         </div>
 
 
@@ -160,7 +162,7 @@
 
         <label for="nom" > date_ambauche :</label>
         <div class="input">
-          <h4 class="title center">{{$user->date_ambauche}}</h4>
+          <h4 class="title center">{{$user[0]->date_ambauche}}</h4>
         </div>
 
     </div>
@@ -169,7 +171,20 @@
 
       </div>
     </div>
-<center><button class="mod" ><a href="#">Modifier</a></button> <button class="sup" ><a href="#">Supprimer</a></button>  </center>
+<center>
+
+   <form action="{{ route('fonctionnaires.destroy', $user[0]->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+
+  
+
+    <button class="sup"  type="submit"><a href="# ">Supprimer</a></button> 
+    <button class="mod" ><a href=" {{route('fonctionnaires.edit',$user[0]->id)}} ">Modifier</a></button>
+
+    </form>
+
+   </center>
   </div>
    
   </section>

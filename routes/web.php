@@ -35,9 +35,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('cadres', CadreController::class);
     Route::resource('grades', GradeController::class);
     Route::resource('indices', IndiceController::class);
-    Route::resource('fonctionnaires', FonctionnaireController::class);
     Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-
+    Route::resource('users', App\Http\Controllers\UserController::class);
     
 });
+
+Route::resource('fonctionnaires', FonctionnaireController::class);

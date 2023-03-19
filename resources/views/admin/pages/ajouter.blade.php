@@ -109,21 +109,25 @@
 
         <label for="nom">Nom  :</label>
         <input type="text"  class="input" placeholder=".." name="nom">
+        @error('nom')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">Prenom  :</label>
         <input type="text"  class="input" placeholder=".." name="prenom">
+        @error('prenom')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">email  :</label>
         <input type="text"  class="input" placeholder=".." name="email">
+        @error('email')<span class="text-danger">{{ $message }}</span>@enderror
 
-        <label for="nom">Nom  :</label>
-        <input type="text"  class="input" placeholder=".." name="nom">
+  
 
         <label for="nom">date_naissance :</label>
         <input type="date"  class="input" name="date_naissance">
+        @error('date_naissance')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">lieu_naissance :</label>
         <input type="text"  class="input"name="lieu_naissance">
+        @error('lieu_naissance')<span class="text-danger">{{ $message }}</span>@enderror
 
         
         <label for="sexe">sexe :</label>
@@ -133,25 +137,29 @@
             <input type="radio" name="sexe" id="no" value="0" class="form-check-input" @if(old('sexe') == '0') checked @endif required>
             <label for="no" class="form-check-label">M</label>
         </div>
+        @error('sexe')<span class="text-danger">{{ $message }}</span>@enderror
 
         <div>
           <label for="image">Image:</label>
           <input type="file" name="image" id="image" class="input">
         </div>
+        @error('image')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">Tél :</label>
         <input type="number" class="input" placeholder=".." name="tel">
       </div>
         <div class="hr"></div>
+        @error('tel')<span class="text-danger">{{ $message }}</span>@enderror
 
         
         <div class="s2">
         <label for="nom">CIN :</label>
         <input type="text" class="input" placeholder=".." name="cin">
+        @error('cin')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">date_ambauche :</label>
         <input type="date"  class="input" name="date_ambauche">
-
+        @error('date_ambauche')<span class="text-danger">{{ $message }}</span>@enderror
       
           <label for="situation_familial">Situation familiale :</label>
           <select class="input" id="situation_familial" name="situation_familial">
@@ -159,18 +167,23 @@
               <option value="Marié(e)">Marié(e)</option>
               <option value="Divorcé(e)">Divorcé(e)</option>
           </select>
+          @error('situation_familial')<span class="text-danger">{{ $message }}</span>@enderror
+          
 
 
           
         <label for="nom">Nbr_enfants :</label>
         <input type="number" class="input" placeholder=".." name="Nbr_enfants">
+        @error('Nbr_enfants')<span class="text-danger">{{ $message }}</span>@enderror
 
         <label for="nom">password :</label>
         <input type="text" class="input" placeholder=".." name="password">
+        @error('password')<span class="text-danger">{{ $message }}</span>@enderror
      
          <label >corp :</label>
           <select class="input " id="cadre" name="corp_id">
             @foreach( $corps as $corp)
+            @error('corp_id')<span class="text-danger">{{ $message }}</span>@enderror
 
             <option value=" {{$corp->id}} "> {{$corp->libelle}} </option>
             @endforeach
@@ -182,6 +195,8 @@
            <option value=" {{$cadre->id}} "> {{$cadre->libelle_c}} </option>
            @endforeach
         </select>
+        @error('cadre_id')<span class="text-danger">{{ $message }}</span>@enderror
+        
         <label >grade :</label>
          <select class="input " id="grade" name="grade_id">
            @foreach( $grades as $grade)
@@ -189,6 +204,9 @@
            <option value=" {{$grade->id}} "> {{$grade->libelle_g}} </option>
            @endforeach
         </select>
+
+        @error('grade_id')<span class="text-danger">{{ $message }}</span>@enderror
+        
         <label >Indice :</label>
          <select class="input " id="grade" name="indice_id">
            @foreach( $indices as $indice)
@@ -196,6 +214,8 @@
            <option value=" {{$indice->id}} "> {{$indice->libelle_i}} </option>
            @endforeach
         </select>
+        @error('indice_id')<span class="text-danger">{{ $message }}</span>@enderror
+
 
   
          <label for="role">Roles :</label>
@@ -206,6 +226,7 @@
           @endforeach
             
          </select>
+         @error('role')<span class="text-danger">{{ $message }}</span>@enderror
          <center><button type="submit" class="sub" >Ajouter</button></center>
 
       </div>

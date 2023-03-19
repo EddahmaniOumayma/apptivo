@@ -24,11 +24,11 @@ class Grade extends Model
          return $this->belongsTo(Cadre::class);
      }
 
-
-     public function indice()
+     public function indices()
      {
          return $this->hasMany(Indice::class);
      }
+      
 }
 
 

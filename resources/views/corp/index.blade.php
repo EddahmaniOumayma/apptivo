@@ -37,7 +37,7 @@
                     <button class="btn btn-danger  sm" type="submit">supprimer</button>
                     <a class="btn btn-primary  sm" href="{{ route('corps.edit', $corp->id) }}">modifier</a>
                
-                </form>
+                    </form>
                 
                 
             </td>

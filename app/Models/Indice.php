@@ -20,12 +20,11 @@ class Indice extends Model
          return $this->belongsTo(Grade::class);
      }
 
-
-     public function user()
+     public function users()
      {
          return $this->belongsToMany(User::class);
      }
-}
+ }
 
 
 
@@ -37,3 +36,4 @@ class Indice extends Model
        //indices :{libelle_i,grade_id}
        //indice_users :{date,indice_id,user_id}
 
+     

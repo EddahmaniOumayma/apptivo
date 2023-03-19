@@ -37,6 +37,7 @@
             <div class="btn_box">
                 <button>
                     <a  href="{{ route('login') }}" >Login</a>
+           
                     
                 </button>
             </div>
