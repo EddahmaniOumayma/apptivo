@@ -8,24 +8,25 @@
 </head>
 <body>
     <h2>modifier cadres</h2>
-    <form action="{{route('cadres.update',$cadre->id)  }}"  method="POST">
+    <form action="{{route('indices.update',$indice->id)  }}"  method="POST">
   
       @csrf
       @method('PUT')
       <div class="form-group mt-3">
-        <label for="exampleFormControlSelect1">Corp</label>
-        <select class="form-control" id="exampleFormControlSelect1" name="corp_id" value={{$cadre->corp_id}}>
+        <label for="exampleFormControlSelect1">grade</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="grade_id">
 
-            @foreach($corp as $c)
-                <option value="{{$c->id}}"> {{$c->libelle}} </option>
+            @foreach($grade as $g)
+                <option value="{{$g->id}}"> {{$g->libelle_g}} </option>
             @endforeach
 
         </select>
       </div>
       <div class="">
         <label >libelle </label>
-        <input type="text" class="form-control"   name="libelle_c" >
+        <input type="text" class="form-control"   name="libelle_i" value= {{$indice->libelle_i}} >
       </div>
+      
              <input  type="submit"  class="btn btn-primary "  value="modifier">
 
     </form>

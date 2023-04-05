@@ -75,10 +75,11 @@
 
       <div class="bottom-content">
         <li class="">
-          <a href="#">
-            <i style="color: #ff003b" class="material-symbols-outlined">
-              logout</i>
-            <span class="text nav-text">Logout</span>
+      
+              <a class="dropdown-item"  href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}</a>
           </a>
         </li>
 

@@ -21,7 +21,11 @@ class PermissionTableSeeder extends Seeder
                'fonctionaires-list',
                'fonctionaires-create',
                'fonctionaires-edit',
-               'fonctionaires-delete'
+               'fonctionaires-delete',
+               'roles-list',
+               'roles-create',
+               'roles-edit',
+               'roles-delete'
             ];
          
             foreach ($permissions as $permission) {

@@ -2,47 +2,50 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APPTIVO</title>
-    <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Welcome - Apptivo</title>
+    <link rel="icon" type="image/jpeg" sizes="60x60" href="assets/img/avatars/avatar1.jpeg">
+    <link rel="icon" type="image/jpeg" sizes="60x60" href="assets/img/avatars/avatar4.jpeg">
+    <link rel="stylesheet" href="{{asset('build/assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="{{asset('build/assets/fonts/fontawesome-all.min.css')}}">
+   
 </head>
 
-<body>
-    <div class="contai">
-        <div class="back">
-            <div class="side">
-                <div class="side_s1"></div>
-                <div class="side_s2"></div>
-            </div>
-            <div class="image"></div>
-        </div>
-        <div class="conten">
-            <div class="logo">
-                <img src="/img/logo.png" alt="">
-            </div>
-            <div class="g_title">
-                <H1>
-                    APP<span class="tivo">TIVO</span>
-                </H1>
-                <div class="faster">Faster.Stronger</div>
-            </div>
-            <div class="para">
-                <span class="apptivo">APPTIVO</span> application qui offre une
-                suite complète de fonctionnalités
-                pour la gestion des ressources
-                humaines.
-            </div>
-            <div class="btn_box">
-                <button>
-                    <a  href="{{ route('login') }}" >Login</a>
-           
-                    
-                </button>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex">
+                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;build/assets/img/images/welcome.jpeg&quot;);"></div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="text-dark mb-4">apptivo</h1>
+                            </div>
+                           
+                                <div class="row mb-3">
+                                    <h4 class="text-dark mb-4">       application qui offre une suite complète de fonctionnalités pour
+                                        la gestion des ressources humaines. !</h4>
+                      
+                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit"><a  class="nav-link" href="{{ route('login') }}">Start</a></button>
+                        
+                                <hr>
+                        
+                         
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="{{asset('build/assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('build/assets/js/bs-init.js')}}"></script>
+    <script src="{{asset('build/assets/js/theme.js')}}"></script>
 </body>
 
 </html>

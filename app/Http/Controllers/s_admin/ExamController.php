@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\s_admin;
 
-use App\Models\Grade;
-use App\Models\Indice;
+use App\Http\Controllers\Controller;
+use App\Models\Exam;
+use App\Models\Question;
+use App\Models\Result;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-class IndiceController extends Controller
+
+class ExamController extends Controller
 {
-       /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data=DB::table('indices')
-        ->join('grades', 'indices.grade_id', '=', 'grades.id')
-        ->select('grades.libelle_g', 'indices.*')
-        ->get();
-        return view('indice.index',compact('data'));
-
-   
-  
-    
+        $exams = Exam::with(['questions' => function($query){
+       
+        },'results'=>function($query){} ])->get();
+        
+       
+         return view('s_admin.exams.index',compact('exams'));
     }
 
     /**
@@ -33,8 +32,8 @@ class IndiceController extends Controller
      */
     public function create()
     {
-        $grade=Grade::all();
-        return view('indice.ajouter',compact('grade'));
+  return view('s_admin.exams.ajouter');
+  
     }
 
     /**
@@ -46,20 +45,20 @@ class IndiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           
           
-            'grade_id' => 'required',
-            'libelle_i' => 'required',
- 
+            'libelle' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+   
         ]);
 
        
 
-        Indice::create($request->all());
+        Exam::create($request->all());
 
       
-        return redirect()->route('indices.index');
+        return redirect()->route('exams.index');
     }
+    
 
     /**
      * Display the specified resource.
@@ -69,7 +68,7 @@ class IndiceController extends Controller
      */
     public function show($id)
     {
-  
+        //
     }
 
     /**
@@ -80,9 +79,10 @@ class IndiceController extends Controller
      */
     public function edit($id)
     {
-        $indice=Indice::find($id);
-        $grade=Grade::all();
-        return view("indice.modifier",compact('indice','grade'));
+        $exam=Exam::find($id);
+    
+        return view('s_admin.exams.modifier',compact('exam'));
+       
     }
 
     /**
@@ -94,22 +94,16 @@ class IndiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
-
-        $indice=Indice::find($id);
-        $indice->update([
-       
-          'libelle_i' =>$request->libelle_i,
-          'grade_id' =>$request->grade_id,
-         
-         
- 
+   
+        $exam=Exam::find($id)->update([
+            'libelle' => $request->libelle,
+            'description' =>  $request->description,
          
           ]);
        ;
 
       
-        return redirect()->route('indices.index');
+        return redirect()->route('exams.index');
     }
 
     /**
@@ -120,8 +114,8 @@ class IndiceController extends Controller
      */
     public function destroy($id)
     {
-        $cadre = Indice::find($id);
-        $cadre->delete();
-        return redirect()->route('indices.index');
+        $exam=Exam::find($id);
+        $exam->delete();
+        return redirect()->route('exams.index');
     }
 }

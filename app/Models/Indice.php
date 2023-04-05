@@ -9,12 +9,8 @@ class Indice extends Model
 {
     use HasFactory;
     protected $table='indices';
-   
-    protected $fillable = [
-
-        'libelle_i',
-        'grade_id',
-     ];
+    protected $guarded = [];
+    
      public function grade()
      {
          return $this->belongsTo(Grade::class);

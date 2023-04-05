@@ -127,9 +127,9 @@
         
         <label for="sexe">sexe :</label>
         <div class="input">
-                                                                                                                                                                                          <input type="radio" name="sexe" id="yes" value="1" {{$user->sexe == "F" ? "checked" : null }} class="form-check-input" @if(old('sexe') == '1') checked @endif required>
+           <input type="radio" name="sexe" id="yes" value="1" @if ($user->sexe == "F" ) checked @endif class="form-check-input" @if(old('sexe') == '1') checked @endif required>
             <label for="yes" class="form-check-label">F</label>
-            <input type="radio" name="sexe" id="no" value="0"  {{$user->sexe == "M" ? "checked" : null }} class="form-check-input" @if(old('sexe') == '0') checked @endif required>
+            <input type="radio" name="sexe" id="no" value="0"  @if ($user->sexe == "M" ) checked @endif class="form-check-input" @if(old('sexe') == '0') checked @endif required>
             <label for="no" class="form-check-label">M</label>
         </div>
 
@@ -139,7 +139,7 @@
         </div>
 
         <label for="nom">Tél :</label>
-        <input type="number" class="input" placeholder=".." name="tel" {{$user->tel}}>
+        <input type="number" class="input" placeholder=".." name="tel" value="{{$user->tel}}">
       </div>
         <div class="hr"></div>
 
@@ -164,8 +164,7 @@
         <label for="nom">Nbr_enfants :</label>
         <input type="number" class="input" placeholder=".." name="Nbr_enfants" value={{$user->Nbr_enfants}} >
 
-        <label for="nom">password :</label>
-        <input type="text" class="input" placeholder=".." name="password" value={{$user->password}}>
+ 
      
          <label >corp :</label>
           <select class="input " id="cadre" name="corp_id" value={{$user->corp_id}}>

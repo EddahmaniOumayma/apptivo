@@ -9,6 +9,7 @@ use App\Models\Corp;
 use App\Models\Grade;
 use App\Models\User;
 use App\Models\Indice;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -26,34 +27,7 @@ class FonctionnaireController extends Controller
     public function index()
     {  
     
-      
-        //     $data = DB::table('users')
-        //     ->join('indice_user', 'users.id', '=', 'indice_user.user_id')
 
-        //     ->join('indices', 'indices.id', '=', 'indice_user.indice_id')
-        //     ->join('grades', 'indices.grade_id', '=', 'grades.id')
-        //     ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
-        //    ->join('corps', 'cadres.corp_id', '=', 'corps.id')->get();
-            // ->whereHas('roles', function ($query) {
-            //     $query->where('name', 'Fonctionnaire');
-            // })
-            // ->paginate(10);
-
-            // $users = User::whereHas('indices',function($query){
-
-            //     $query->whereHas('grade',function($query){
-
-            //         $query->whereHas('cadre',function($query){
-
-            //             $query->whereHas('corp',function($query){
-
-
-            //             });
-            //         });
-
-            //     });
-
-            // });
 
             $data = User::with(['indices' => function($query){
                 $query->with(['grade' => function($query){
@@ -63,25 +37,9 @@ class FonctionnaireController extends Controller
                 }]);
             }])->get();
             
-            // return response()->json($users);
-
-            
-            
-            
-            
-            
-            
-          
-    
-     
-
-            
-
-       
-
-             
+            // return response()->json($users);  
             // $data = $data->paginate(10);
-    
+            
     
              return view("admin.index",compact('data'));
 
@@ -256,13 +214,13 @@ class FonctionnaireController extends Controller
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
             'sexe' => 'required|in:0,1',
-            'image' => 'nullable|max:2048',
-            'tel' => 'required|string',
-            'cin' => 'required|string|max:255|unique:users,cin',
+            'image' => 'nullable|max:2048'.$id,
+            'tel' => 'required|string|unique:users,tel,'.$id,
+            'cin' => 'required|string|max:255|unique:users,cin,'.$id,
             'date_ambauche' => 'required|date',
             'situation_familial' => 'required|string|max:255',
             'Nbr_enfants' => 'nullable|integer|min:0',
-            'password' => 'required|string|min:8|max:255',
+         
             'corp_id' => 'required',
             'cadre_id' => 'required',
             'grade_id' => 'required',
@@ -313,14 +271,15 @@ class FonctionnaireController extends Controller
     $user->date_ambauche = $request->input('date_ambauche');
     $user->situation_familial = $request->input('situation_familial');
     $user->Nbr_enfants = $request->input('Nbr_enfants');
-    $user->password = Hash::make($request->input('password'));
+
     $user->save();
     
     // update indice_user pivot record
     $indice = Indice::where('id', $request->input('indice_id'))->firstOrFail();
 
-    $now = now();
-    $user->indices()->attach($indice->id,['updated_at' => $now]);
+   
+    // $user->indices()->sync($indice->id)->update(['updated_at' => Carbon::now()]);
+    $user->indices()->syncWithPivotValues($indice->id, ['updated_at' => now()]);
     
     
     // Redirect to user profile page Here

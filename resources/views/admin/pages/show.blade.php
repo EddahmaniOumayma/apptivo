@@ -106,11 +106,12 @@
 
      <div class="profile_fon">
       <img src="wallpaperflare.com_wallpaper (8).jpg" alt="">
-      <h3 class="title pp">{{$user[0]->nom}}{{$user[0]->prenom}}</h3>
+      <h3 class="title pp">{{$user[0]->nom}} {{$user[0]->prenom}}</h3>
      </div>
  
     <div class="add">
       <div class="s1">
+       
 
         <label for="nom">Nom & Prénom </label>
         <div class="input">
@@ -144,10 +145,10 @@
         <div class="hr"></div>
         <div class="s2">
           <label for="nom">Date de Naissance :</label>
-          <div class="input">
+         <div class="input">
             <h4 class="title center">{{$user[0]->date_naissance}}</h4>
           </div>
-
+ 
         <label for="nom">Tél :</label>
         <div class="input">
           <h4 class="title center">{{$user[0]->tel}}</h4>
@@ -156,14 +157,14 @@
         <div class="input">
           <h4 class="title center">{{$user[0]->cin}}</h4>
         </div>
+        
+                <label for="nom" > date_ambauche :</label>
+                <div class="input">
+                  <h4 class="title center">{{$user[0]->date_ambauche}}</h4>
+                </div>
 
 
    
-
-        <label for="nom" > date_ambauche :</label>
-        <div class="input">
-          <h4 class="title center">{{$user[0]->date_ambauche}}</h4>
-        </div>
 
     </div>
 
