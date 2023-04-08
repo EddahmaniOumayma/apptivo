@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inscriptions', function (Blueprint $table) {
+        Schema::create('concour_user', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('concour_id');
+            $table->foreign('concour_id')->references('id')->on('concours')->onDelete('cascade');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade')->onUpdate('cascade'); 
-        
+             
+            $table->integer('note');
             $table->timestamps();
+
         });
     }
 
@@ -32,6 +35,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscriptions');
+        Schema::dropIfExists('concour_user');
     }
 };
+ 

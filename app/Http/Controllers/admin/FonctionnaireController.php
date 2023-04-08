@@ -41,7 +41,7 @@ class FonctionnaireController extends Controller
             // $data = $data->paginate(10);
             
     
-             return view("admin.index",compact('data'));
+             return view("admin.pages.index",compact('data'));
 
     }
 

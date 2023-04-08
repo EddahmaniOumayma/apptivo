@@ -41,9 +41,9 @@ public function authenticated(Request $request)
 
     if ($user) {
         if ($user->hasRole('Admin')) {
-            return redirect()->route('fonctionnaires.index');
+            return redirect()->route('dashbord');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('dashbordF');
         }
     }
 }

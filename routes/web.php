@@ -7,12 +7,14 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\IndiceController;
 
 use App\Http\Controllers\RoleController;
+
 use App\Http\Controllers\s_admin\ExamController;
 use App\Http\Controllers\s_admin\QuestionController;
 use App\Models\User;
 use App\Notifications\ToNextIndice;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,10 +45,48 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('indices', IndiceController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('users',UserController::class);
+
+    Route::get('/Dashbord', function () {
+        return view('admin.dashbord');
+    })->name('dashbord');
+
+     Route::resource('fonctionnaires', FonctionnaireController::class);
+  
+    Route::get('/Profile', function () {
+        $user=User::all();
+
+        return view('admin.profile',compact('user'));
+    })->name('profile');
+
+    Route::get('/Profilef', function () {
+        $user=User::all();
+        return view('Fonctionnaire.profile',compact('user'));
+    })->name('profilef');
+
+     Route::resource('fonctionnaires', FonctionnaireController::class);
+
+     Route::get('/DashbordF', function () {
+        return view('Fonctionnaire.dashbord');
+    })->name('dashbordF');
+
+
+     Route::get('/InscriptionPdf', function () {
+        return view('Fonctionnaire.InscriptionPdf');
+    })->name('InscriptionPdf');
+
+    Route::get('send_mail_pdf', [SendMailPDFController::class, 'sendMailWithPDF'])->name('send_mail_pdf');
+
+
+
+
+
+  
     
 });
 
-Route::resource('fonctionnaires', FonctionnaireController::class);
+
+
+
 Route::resource('exams', ExamController::class);
 Route::resource('questions', QuestionController::class);
 

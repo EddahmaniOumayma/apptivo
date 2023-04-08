@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model //answer
+class Concour_user extends Model
 {
     use HasFactory;
 
-    protected $table='answers';
+    protected $table='concour_user';
     protected $guarded = [];
 
-    public function Question()
-    {
-        return $this->belongsTo(Question::class);
-    }
+
+    
 }

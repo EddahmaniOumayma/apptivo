@@ -53,10 +53,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Indice::class);
     }
 
-    public function resultats()
+    public function concours()
     {
-        return $this->hasMany(Resultat::class);
+        return $this->belongsToMany(Concour::class);
     }
+
+  
 
 
 }

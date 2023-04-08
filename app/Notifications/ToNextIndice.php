@@ -2,10 +2,12 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+
 
 class ToNextIndice extends Notification
 {
@@ -33,7 +35,7 @@ class ToNextIndice extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -44,12 +46,31 @@ class ToNextIndice extends Notification
      */
     public function toMail($notifiable)
     {
+       
+    
+     
+  
+
         return (new MailMessage)
         ->line('Salut ' . $notifiable->nom . ' ' . $notifiable->prenom . ',')
         ->line('Félicitations, vous avez été promu au prochain indice dans votre grade !')
-        ->action('Vérifier votre niveau indice Eshlon', url('/apptivo.com'))
+        ->action('Vérifier votre niveau indice Eshlon', url('/Profilef'))
+       
         ->line('Merci !');
+      
     }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+           'body'=>'Félicitations' .$notifiable->nom . ' ' . $notifiable->prenom . ' , vous avez été promu au prochain indice dans votre grade !',
+           'icon'=>'fas fa-exclamation-triangle text-white',
+           'url'=>url('/Profilef')
+        ];
+       
+
+    }
+
 
 
     

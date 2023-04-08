@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use App\Notifications\Inscription;
 use App\Notifications\ToNextGrade;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -143,7 +144,9 @@ class UserAgregation extends Command
               {
                $user->indices()->update(['grade_id' =>3]);
                $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
-               Notification::send($user, new ToNextGrade($user));
+                              //  Notification::send($user, new Inscription($user));
+
+            
 
               }
               //indice  12_ 6  test concours grade 2
@@ -191,7 +194,8 @@ class UserAgregation extends Command
               {
                 $user->indices()->update(['grade_id' =>4]);
                 $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                // Notification::send($user, new Inscription($user));
+
 
 
              
@@ -209,63 +213,72 @@ class UserAgregation extends Command
               {
                 $user->indices()->syncWithPivotValues(27,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
                
               }
               elseif($indiceId == 27)
               {
                 $user->indices()->syncWithPivotValues(28,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId == 29)
               {
                 $user->indices()->syncWithPivotValues(30,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId == 30)
               {
                 $user->indices()->syncWithPivotValues(31,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId ==31)
               {
                 $user->indices()->syncWithPivotValues(32,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId ==32)
               {
                 $user->indices()->syncWithPivotValues(33,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId ==33)
               {
                 $user->indices()->syncWithPivotValues(34,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId ==34)
               {
                 $user->indices()->syncWithPivotValues(35,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
               elseif($indiceId ==35)
               {
                 $user->indices()->syncWithPivotValues(36,['updated_at' => now()]);
                 $user->update(['created_at' => now()]);
-                Notification::send($user, new ToNextGrade($user));
+                Notification::send($user, new ToNextIndice($user));
+
 
               }
           

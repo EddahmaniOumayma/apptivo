@@ -11,6 +11,8 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="{{asset('build/assets/fonts/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('build/assets/bootstrap/css/style.css')}}">
+   
    
 </head>
 
@@ -46,6 +48,9 @@
     <script src="{{asset('build/assets/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('build/assets/js/bs-init.js')}}"></script>
     <script src="{{asset('build/assets/js/theme.js')}}"></script>
+    <script src="{{asset('build/assets/bootstrap/js/autoslider.js')}}"></script>
+    <script src="{{asset('build/assets/bootstrap/js/text_editor.js')}}"></script>
+ 
 </body>
 
 </html>
