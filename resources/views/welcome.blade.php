@@ -17,34 +17,54 @@
 </head>
 
 <body class="bg-gradient-primary">
-    <div class="container">
-        <div class="card shadow-lg o-hidden border-0 my-5">
+    <div  class="cont">
+        <div class="card shadow-lg o-hidden border-0 my-4 cont_box">
             <div class="card-body p-0">
-                <div class="row">
+                <div style="height: 90vh;" class="row">
                     <div class="col-lg-5 d-none d-lg-flex">
-                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;build/assets/img/images/welcome.jpeg&quot;);"></div>
+                        <!-- _________________________________auto slider start_______________________________ -->
+
+<div class="slider_">
+    <div style="background-image:url(&quot;build/assets/img/images/p1.jpg&quot;);background-size: cover; background-repeat: no-repeat;" class="slide_rx active"></div>
+    <div style="background-image:url(&quot;build/assets/img/images/p2.jpg&quot;);background-size: cover; background-repeat: no-repeat;" class="slide_rx "></div>
+    <div style="background-image:url(&quot;build/assets/img/images/p3.jpg&quot;);background-size: cover; background-repeat: no-repeat;" class="slide_rx "></div>
+    <div style="background-image:url(&quot;build/assets/img/images/p5.jpg&quot;);background-size: cover; background-repeat: no-repeat;" class="slide_rx "></div>
+  </div>
+
+<!-- _________________________________auto slider end_______________________________ -->
                     </div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="text-dark mb-4">apptivo</h1>
+                    <div class="col-lg-7 d-f">
+                        <div class="p-2">
+                            {{-- <h1 class="app_h1 py-1 text-center">
+                                APPTIVO
+                            </h1> --}}
+                           <h1 class="app_h1 py-1 text-center">
+                                APP<span class="app_span">TIVO</span>
+                            </h1> 
+                            <div class="faster text-center">
+                                Faster.Stronger
                             </div>
-                           
-                                <div class="row mb-3">
-                                    <h4 class="text-dark mb-4">       application qui offre une suite complète de fonctionnalités pour
-                                        la gestion des ressources humaines. !</h4>
-                      
-                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit"><a  class="nav-link" href="{{ route('login') }}">Start</a></button>
-                        
-                                <hr>
-                        
-                         
+                            <div class="text_editor">
+                                <div id="code-container text-center">
+                                    <pre id="code"></pre>
+                                </div>
+                            </div>
+                            <div class="app_b">
+                                <div class="app_b1 text-center">
+                                    <a href="{{ route('login') }}" >
+                                        <button class="btn btn-primary  btn-user  text-center bbl" type="submit">Commençons<i class="fa fa-arrow-right px-2"></i></button>
+                                        <!-- <button class="app_btn_b">let's start<i class="fa fa-arrow-right px-2"></i></button> -->
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="{{asset('build/assets/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('build/assets/js/bs-init.js')}}"></script>
     <script src="{{asset('build/assets/js/theme.js')}}"></script>

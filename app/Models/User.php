@@ -56,6 +56,10 @@ class User extends Authenticatable
     public function concours()
     {
         return $this->belongsToMany(Concour::class);
+    } 
+    public function conges()
+    {
+        return $this->belongsToMany(Conge::class);
     }
 
   

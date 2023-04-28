@@ -16,18 +16,17 @@ class CorpSeeder extends Seeder
      */
     public function run()
     {
+        $corps = [
+            ['libelle' => 'Techniciens',   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle' => 'Administrateurs',   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle' => 'Ingénieurs et architectes',   'created_at' => now(),
+            'updated_at' => now(),],
+        
+        ];
+        DB::table('corps')->insert($corps);
 
 
-$faker = FakerFactory::create();
-
-for ($i = 0; $i < 10; $i++) {
-    $libelle = $faker->unique()->jobTitle;
-
-    DB::table('corps')->insert([
-        'libelle' => $libelle,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-}
     }
 }

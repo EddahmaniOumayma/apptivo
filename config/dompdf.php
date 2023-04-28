@@ -278,18 +278,7 @@ return array(
          * @var bool
          */
         "enable_html5_parser" => true,
-       
-            'enable_remote' => true,
-            'enable_html5_parser' => true,
-            'font_dir' => storage_path('fonts/'),
-            'font_cache' => storage_path('fonts/'),
-            'default_font' => 'Arial',
-     
-
-
-    
     ),
-    
 
 
 );

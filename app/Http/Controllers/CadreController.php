@@ -18,11 +18,13 @@ class cadreController extends Controller
      */
     public function index()
     {
-        $data=DB::table('cadres')
+        $cadres=DB::table('cadres')
         ->join('corps', 'cadres.corp_id', '=', 'corps.id')
         ->select('corps.libelle', 'cadres.*')
-        ->get();
-        return view('cadre.index',compact('data'));
+        ->paginate(10);
+
+        $corps=Corp::all();
+        return view('cadre.index',compact('cadres','corps'));
         
        
   
@@ -36,8 +38,8 @@ class cadreController extends Controller
      */
     public function create()
     {
-        $corp=Corp::all();
-        return view('cadre.ajouter',compact('corp'));
+        $corps=Corp::all();
+        return view('cadre.ajouter',compact('corps'));
     }
 
     /**
@@ -124,7 +126,12 @@ class cadreController extends Controller
     public function destroy($id)
     {
         $cadre = cadre::find($id);
+       
+      
+        if (!$cadre) {
+            return back()->withErrors(['message' => 'Enregistrement introuvable.']);
+        }
         $cadre->delete();
-        return redirect()->route('cadres.index');
+        return redirect()->route('cadres.index')->with('succès', 'Lenregistrement a été supprimé.');
     }
 }

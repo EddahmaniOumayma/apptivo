@@ -14,8 +14,8 @@ class CorpController extends Controller
      */
     public function index()
     {
-        $data=Corp::all(); 
-        return view('corp.index',compact('data'));
+        $corps=Corp::paginate(10); 
+        return view('corp.index',compact('corps'));
     
     }
 
@@ -107,8 +107,14 @@ class CorpController extends Controller
     public function destroy($id)
     {
         $corp = Corp::find($id);
+    
+       
+      
+        if (!$corp) {
+            return back()->withErrors(['message' => 'Enregistrement introuvable.']);
+        }
         $corp->delete();
-        return redirect()->route('corps.index');
+        return redirect()->route('corps.index')->with('succès', 'Lenregistrement a été supprimé.');
     }
    
 }

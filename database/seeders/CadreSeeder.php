@@ -17,26 +17,25 @@ class CadreSeeder extends Seeder
     public function run()
     {
 
+        $corpIds = DB::table('corps')->pluck('id')->toArray();
 
-$faker = FakerFactory::create();
+        $cadres = [
+            ['libelle_c' => 'Techniciens', 'corp_id' => $corpIds[0],   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle_c' => 'Administrateurs', 'corp_id' => $corpIds[1],   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle_c' => 'Ingénieurs d application', 'corp_id' => $corpIds[2],   'created_at' => now(),
+            'updated_at' => now(),],
+          
+        ];
 
-$corpIds = DB::table('corps')->pluck('id')->toArray();
-
-for ($i = 0; $i < 10; $i++) {
-    $libelle_c = $faker->unique()->jobTitle;
-
-    $corp_id = $faker->randomElement($corpIds);
-
-    DB::table('cadres')->insert([
-        'libelle_c' => $libelle_c,
-        'corp_id' => $corp_id,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-}
+        DB::table('cadres')->insert($cadres);
+    }
 
 
+    
+   
 
 
     }
-}
+

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Concour;
 use App\Models\User;
 use App\Notifications\Inscription;
 use App\Notifications\ToNextGrade;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ToNextIndice;
+use Illuminate\Support\Facades\DB;
 
 class UserAgregation extends Command
 {
@@ -42,6 +44,9 @@ class UserAgregation extends Command
         {
           $indiceUser= $user->indices->first();
           $indiceId=$indiceUser->id;
+
+       
+
           $gradeUser=$indiceUser->grade->first();
           $gradeId=$gradeUser->id;
           
@@ -51,7 +56,7 @@ class UserAgregation extends Command
         
 
         
-                       //-------------------------------------------------------------grade1
+                       //-------------------------------------------------------------grade4
 
               if($indiceId == 1)
               {
@@ -102,7 +107,7 @@ class UserAgregation extends Command
              //indice   6   grade 1 auto
 
 
-                          //-------------------------------------------------------------grade2
+                          //-------------------------------------------------------------grade3
 
               elseif($indiceId == 7)
               {
@@ -142,19 +147,200 @@ class UserAgregation extends Command
               }
               elseif($indiceId ==12)
               {
-               $user->indices()->update(['grade_id' =>3]);
-               $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
-                              //  Notification::send($user, new Inscription($user));
+           
+                Notification::send($user, new Inscription($user));
+               
+                
+                 
+                $concour=Concour::where('grade_id','=',3)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+                
+                $date_examination=DB::table('concours')
+                ->select('date_examination')
+              
+                ->where('id','=',$concourId)
+             
+                ->first();
 
-            
+                if($note >=10){
+                  $user->indices()->update(['grade_id' =>3]);
+                  $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
+                  Notification::send($user, new ToNextGrade($user));
 
+
+            }
+            else{
+              $user->indices()->syncWithPivotValues(13,['updated_at' => now()]);
+              $user->update(['created_at' => now()]);
+              Notification::send($user, new ToNextIndice($user));
+              
+
+
+            }
+
+
+                
+
+                
+              
+               
+             
               }
+              elseif($indiceId ==13)
+              {
+           
+                Notification::send($user, new Inscription($user));
+               
+                
+                 
+                $concour=Concour::where('grade_id','=',3)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+                
+                
+              
+                
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>3]);
+                      $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(14,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+                  
+
+
+                }
+             
+              }
+              elseif($indiceId ==14)
+              {
+           
+                Notification::send($user, new Inscription($user));
+               
+                
+                 
+                $concour=Concour::where('grade_id','=',3)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+                
+              
+                
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>3]);
+                      $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(15,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+                  
+
+
+                }
+             
+              }
+
+              elseif($indiceId ==15)
+              {
+           
+                Notification::send($user, new Inscription($user));
+               
+                
+                 
+                $concour=Concour::where('grade_id','=',3)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+                
+              
+                
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>3]);
+                      $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(16,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+                  
+
+
+                }
+             
+              }
+              elseif($indiceId ==16)
+              {
+           
+                Notification::send($user, new Inscription($user));
+           
+                      $user->indices()->update(['grade_id' =>3]);
+                      $user->indices()->syncWithPivotValues(17,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+                }
+             
+              
               //indice  12_ 6  test concours grade 2
 
 
               //si non admin passer a l indice 13->14->15->16
 
-                          //-------------------------------------------------------------grade3
+                          //-------------------------------------------------------------grade2
               elseif($indiceId == 17)
               {
                 $user->indices()->syncWithPivotValues(18,['updated_at' => now()]);
@@ -190,16 +376,156 @@ class UserAgregation extends Command
                 Notification::send($user, new ToNextIndice($user));
 
               }
-              elseif($indiceId == 22)
+         
+              elseif($indiceId ==22)
               {
-                $user->indices()->update(['grade_id' =>4]);
-                $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
-                // Notification::send($user, new Inscription($user));
+           
+                Notification::send($user, new Inscription($user));
+             
+                $concour=Concour::where('grade_id','=',4)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+       
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>4]);
+                      $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
 
 
-
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(23,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+        
+                }
              
               }
+              elseif($indiceId ==23)
+              {
+           
+                Notification::send($user, new Inscription($user));
+             
+                $concour=Concour::where('grade_id','=',4)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+       
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>4]);
+                      $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(24,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+        
+                }
+             
+              }
+              elseif($indiceId ==24)
+              {
+           
+                Notification::send($user, new Inscription($user));
+             
+                $concour=Concour::where('grade_id','=',4)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+       
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>4]);
+                      $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(25,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+        
+                }
+             
+              }
+              elseif($indiceId ==25)
+              {
+           
+                Notification::send($user, new Inscription($user));
+             
+                $concour=Concour::where('grade_id','=',4)->first();
+                
+              
+                $user->concours()->attach($concour->id,['note' => 0]);
+                
+               
+                $UserConcour= $user->concours->first();
+                $concourId=$UserConcour->id;
+                $userId=$user->id;
+                $note=DB::table('concour_user')
+                ->select('note')
+                ->where('user_id','=',$userId)
+                ->where('concour_id','=',$concourId)
+                ->first();
+               
+       
+                if($note >=10){
+                      $user->indices()->update(['grade_id' =>4]);
+                      $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+
+                }
+                else{
+                  $user->indices()->syncWithPivotValues(26,['updated_at' => now()]);
+                  $user->update(['created_at' => now()]);
+                  Notification::send($user, new ToNextIndice($user));
+        
+                }
+             
+              }
+              elseif($indiceId ==26)
+              {
+           
+                      $user->indices()->update(['grade_id' =>3]);
+                      $user->indices()->syncWithPivotValues(27,['updated_at' => now()]);
+                      Notification::send($user, new ToNextGrade($user));
+
+                }
+              
                 
               //indice  23_ 6  Agregation avec concours grade 3
 

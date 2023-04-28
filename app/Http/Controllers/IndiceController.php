@@ -14,12 +14,13 @@ class IndiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data=DB::table('indices')
+    { 
+        $grades=Grade::all();
+        $indices=DB::table('indices')
         ->join('grades', 'indices.grade_id', '=', 'grades.id')
         ->select('grades.libelle_g', 'indices.*')
-        ->get();
-        return view('indice.index',compact('data'));
+        ->paginate(10);
+        return view('indice.index',compact('indices','grades'));
 
    
   
@@ -33,8 +34,8 @@ class IndiceController extends Controller
      */
     public function create()
     {
-        $grade=Grade::all();
-        return view('indice.ajouter',compact('grade'));
+        $grades=Grade::all();
+        return view('indice.ajouter',compact('grades'));
     }
 
     /**
@@ -120,8 +121,21 @@ class IndiceController extends Controller
      */
     public function destroy($id)
     {
-        $cadre = Indice::find($id);
-        $cadre->delete();
-        return redirect()->route('indices.index');
+        $indice = Indice::find($id);
+        if (!$indice) {
+            return back()->withErrors(['message' => 'Enregistrement introuvable.']);
+        }
+        return view('indices.delete', compact('indice'));
     }
+    
+    public function delete($id)
+    {
+        $indice = Indice::find($id);
+        if (!$indice) {
+            return back()->withErrors(['message' => 'Enregistrement introuvable.']);
+        }
+        $indice->delete();
+        return redirect()->route('indices.index')->with('succès', 'Lenregistrement a été supprimé.');
+    }
+  
 }

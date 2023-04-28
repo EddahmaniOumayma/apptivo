@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Arr;
-    
+use Illuminate\Support\Facades\Hash as FacadesHash;
+
 class UserController extends Controller
 {
     /**
@@ -51,7 +53,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        $input['password'] =hash::make($input['password']);
     
         $user = User::create($input);
         $user->assignRole($request->input('roles'));

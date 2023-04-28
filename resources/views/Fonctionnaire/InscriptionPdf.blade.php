@@ -5,7 +5,7 @@
                     
     <div class=>
         <div >
-             <center><h3 c>Attestation d'scription</h3></center>
+             <center><h1 >Attestation d'inscription</h1></center>
              <hr>
         </div>
          
@@ -13,49 +13,43 @@
                     <div >
                         <table  >
                        
-                            <tr>
-                                <td> <h5>Nom :</h5></td>
-                                <td> <h5 >{{ $data['user']->nom }} </h5> </td>
-                            </tr>
-                            <tr> <td> <h5>Prenom :</h5></td>
-                              <td> <h5 > {{ $data['user']->prenom }}</h5> </td>
-                            </tr>
-                            <tr>
-                              <td> <h5>Email :</h5></td>
-                              <td> <h5 > {{ $data['user']->email }}</h5> </td>
-                            </tr>
-                            <tr>
+                            
+                             <h3>Nom : {{ $notifiable->nom }}</h3></td>
+                            
+                            
+                            <h3>Prenom : {{ $notifiable->prenom }}</h3></td>
                               
-                                <td> <h5>Date de naissance :</h5></td>
-                                <td> <h5 > {{ $data['user']->date_naissance }}</h5> </td>
-                            </tr>
-                            <tr>
+                            
+                              <h3>Email :  {{ $notifiable->email }}</h3>
+                              
+                           
+                              
+                                 <h3>Date de naissance : {{ $notifiable->date_naissance }}</h3>
+                                 <h3 > </h3> 
+                         
                              
-                                <td> <h5>situation_familial :</h5></td>
-                                <td> <h5 >  {{ $data['user']->situation_familial }}</h5> </td>
+                                 <h3>situation_familial : {{ $notifiable->situation_familial }}</h3>
+                                
 
                             </tr>
                             <tr>
                              
-                                <td> <h5>grade :</h5></td>
-                                <td> <h5 >  </h5> </td>
+                   
 
-                            </tr>
-                            <tr>
+                           
                               
-                                <td> <h5>Tel :</h5></td>
-                                <td> <h5 > {{ $data['user']->tel }}</h5> </td>
-                            </tr>
-                            <tr>
-                              <td> <h5>Cin :</h5></td>
-                              <td> <h5 >{{ $data['user']->cin }}</h5> </td>
+                                <h3>Tel : {{ $notifiable->tel }}</h3>
+                                <h3 > </h3> 
+                            
+                        
+                              <h3>Cin : {{ $notifiable->cin }}</h3></td>
+                                
                             </tr>
                             
-                        </table>
-                        <tr> 
-                         <td><p> est inscrit(e)  au concous d 'agregation puor l'année  2022/2023</p> </td> 
-                      </tr>
-                        <tr> 
+                        
+                         
+                       <p> est inscrit(e)  au concous d 'agregation puor l'année  {{ \Carbon\Carbon::now()->year }}</p>  
+                      
                          <td> </td> 
                          <td>Signature de Directeur </td> 
                          <td>OUMAYMA EDDAHMANI </td> 
@@ -77,16 +71,13 @@
    
    
 
-                    </table>
+                 
             </div>
                     
         </div>
     </fieldset>
         
-        <center>             
-          <button> <a  href="">&nbsp;Importer L'inscription</a></button>
-       </center> 
-        
+       
         
 
         

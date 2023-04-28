@@ -16,12 +16,13 @@ class GradeController extends Controller
      */
     public function index()
     {
+        $cadres=Cadre::all();
 
-        $data=DB::table('grades')
+        $grades=DB::table('grades')
         ->join('cadres', 'grades.cadre_id', '=', 'cadres.id')
         ->select('cadres.libelle_c', 'grades.*')
-        ->get();
-        return view('grade.index',compact('data'));
+        ->paginate(10);
+        return view('grade.index',compact('cadres','grades'));
        
   
     
@@ -34,8 +35,8 @@ class GradeController extends Controller
      */
     public function create()
     {
-        $cadre=Cadre::all();
-        return view('grade.ajouter',compact('cadre'));
+        $cadres=Cadre::all();
+        return view('grade.ajouter',compact('cadres'));
     }
 
     /**
@@ -87,7 +88,7 @@ class GradeController extends Controller
     {
         $grade=Grade::find($id);
 
-        $cadre=Cadre::all();
+      
 
         return view("grade.modifier",compact('cadre','grade'));
     }
@@ -127,8 +128,13 @@ class GradeController extends Controller
      */
     public function destroy($id)
     {
-        $grade = Grade::find($id);
-        $grade->delete();
-        return redirect()->route('grades.index');
+        $cadre = cadre::find($id);
+       
+      
+        if (!$cadre) {
+            return back()->withErrors(['message' => 'Enregistrement introuvable.']);
+        }
+        $cadre->delete();
+        return redirect()->route('cadres.index')->with('succès', 'Lenregistrement a été supprimé.');
     }
 }

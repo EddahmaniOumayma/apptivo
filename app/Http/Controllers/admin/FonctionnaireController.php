@@ -9,12 +9,14 @@ use App\Models\Corp;
 use App\Models\Grade;
 use App\Models\User;
 use App\Models\Indice;
+use App\Mail\NewUserWelcomeMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
 class FonctionnaireController extends Controller
@@ -35,7 +37,12 @@ class FonctionnaireController extends Controller
                         $query->with('corp');
                     }]);
                 }]);
-            }])->get();
+            }]);
+
+            $data = $data->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+                })
+            ->paginate(10);
             
             // return response()->json($users);  
             // $data = $data->paginate(10);
@@ -140,10 +147,21 @@ class FonctionnaireController extends Controller
 
     $now = now();
     $user->indices()->attach($indice->id,['created_at' => $now]);
+
+
+      // Send email with login credentials
+
+    $data = [
+        'name' => $user->nom . ' ' . $user->prenom,
+        'email' => $user->email,
+        'password' => $request->input('password')
+    ];
+       Mail::to($user->email)->send(new NewUserWelcomeMail($data));
+
     
     
     // Redirect to user profile page Here
-    return redirect()->route('fonctionnaires.index');
+    return redirect()->route('fonctionnaires.index')->with('success', 'Fonctionnaire ajoutée  !');
           
 
     
@@ -186,7 +204,7 @@ class FonctionnaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {    $user=User::find($id);
        
         $indices=Indice::all();
         $grades=Grade::all();
@@ -214,7 +232,7 @@ class FonctionnaireController extends Controller
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
             'sexe' => 'required|in:0,1',
-            'image' => 'nullable|max:2048'.$id,
+            //  'image' => 'nullable|max:2048'.$id,
             'tel' => 'required|string|unique:users,tel,'.$id,
             'cin' => 'required|string|max:255|unique:users,cin,'.$id,
             'date_ambauche' => 'required|date',
@@ -283,7 +301,7 @@ class FonctionnaireController extends Controller
     
     
     // Redirect to user profile page Here
-    return redirect()->route('fonctionnaires.index');
+    return redirect()->route('fonctionnaires.index')->with('info', 'les informations de fonctionnaire est   modifier !');
     }
 
     /**
@@ -294,6 +312,31 @@ class FonctionnaireController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+      
+    // Get the user by id
+    $user = User::findOrFail($id);
+
+    // Delete user's indices
+    $user->indices()->detach();
+
+    // Delete user
+    $user->delete();
+
+    // Redirect to user profile page
+    return redirect()->route('fonctionnaires.index');
+}
+
+    public function search(Request $request)
+{
+    // Récupérer le terme de recherche depuis le formulaire
+    $search = $request->input('search');
+
+    // Recherche de fonctionnaires par nom ou CIN
+    $fonctionnaires = User::where('nom', 'LIKE', '%'.$search.'%')
+                        ->orWhere('cin', 'LIKE', '%'.$search.'%')
+                        ->get();
+
+    // Rediriger vers la vue de liste de fonctionnaires avec les résultats de la recherche
+    return view('fonctionnaires.index', ['fonctionnaires' => $fonctionnaires]);
+}
 }

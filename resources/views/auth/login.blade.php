@@ -22,7 +22,8 @@
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-flex">
-                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;build/assets/img/images/login.jpg&quot;);"></div>
+                                <div class="flex-grow-1 bg-login-image" style="background-image:
+                                 url(&quot;build/assets/img/images/login.jpg&quot;);"></div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -31,7 +32,7 @@
                                     </div>
                                     <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
-                                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __(' Address Email') }}</label>
                                         <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrez Votre  Address Email..." name="email"  @error('email') is-invalid @enderror"  value="{{ old('email') }}" required autocomplete="email" autofocus>
                                             </div>
                                             @error('email')
@@ -40,7 +41,7 @@
                                             
                                             @enderror
                                             
-                                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                        <label for="password" class="col-md-4 col-form-label ">{{ __('Mot de passe') }}</label>
                                         <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Mot de passe" name="password" @error('password') is-invalid @enderror"  required autocomplete="current-password"></div>
                                         @error('password')
                                         
@@ -52,15 +53,16 @@
                                           @enderror
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small">
-                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1"  name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>    {{ __('Remember Me') }}</label></div>
+                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1">
+                                                    <label class="form-check-label custom-control-label" for="formCheck-1"  name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>    {{ __('Souvenez-vous de moi') }}</label></div>
                                             </div>
-                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit"> {{ __('Login') }}</button>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit"> {{ __('Connectez-vous') }}</button>
                                         <hr>
                                     </form>
-                                    {{-- @if (Route::has('password.request'))
-                                    <div class="text-center"><a class="small" href="{{ route('password.request') }}">  {{ __('Forgot Your Password?') }}</a></div>
+                                    @if (Route::has('password.request'))
+                                    <div class="text-center"><a class="small" href="{{ route('password.request') }}">  {{ __('Vous avez oublié votre mot de passe ?') }}</a></div>
                                     </a>
-                                @endif --}}
+                                @endif
                                    
                                     
                                 </div>
@@ -73,7 +75,7 @@
     </div>
     <script src="{{asset('build/assets/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('build/assets/js/bs-init.js')}}"></script>
-    <script src="{{asset('build/assets/js/theme.js')}}"></script>t>
+    <script src="{{asset('build/assets/js/theme.js')}}"></script>
 </body>
 
 </html>

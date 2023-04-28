@@ -46,10 +46,6 @@ class ToNextIndice extends Notification
      */
     public function toMail($notifiable)
     {
-       
-    
-     
-  
 
         return (new MailMessage)
         ->line('Salut ' . $notifiable->nom . ' ' . $notifiable->prenom . ',')

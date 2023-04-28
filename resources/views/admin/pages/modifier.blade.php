@@ -1,5 +1,9 @@
 @extends('admin.layouts.master')
 @section('contenu')
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-dark mb-0"></h3>
+    <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="{{route('fonctionnaires.create')}}">&nbsp;Ajouter Fonctionnaires</a>
+</div>
 
 
         <div class="container-fluid">
@@ -20,7 +24,7 @@
                       <!-- _______________ profile image start _______________ -->
                       <div class="row">
                         <div class="card-body  text-center">
-                            <img class="rounded-circle mb-2 " id="preview" src="{{asset('storage/'.auth()->user()->image)}}" alt="" width="140" height="140">
+                            <img class="rounded-circle mb-2 " id="preview"  src="{{asset("storage/".$user->image)}}" alt="" width="140" height="140">
                             <div class="mb-3">
                                 <input type="file" id="myFileInput" onchange="previewImage(event); updateFileName()" name="image" value={{$user->image}}>
                                 <label class="label_" for="myFileInput">photo<i  class="fa fa-upload mx-2"></i></label>
@@ -151,16 +155,7 @@
                                               </div>
                                               <div class="row">
                                                   
-                                                      <div class="col">
-                                                          <div class="has-float-label mb-4">
-                                                              <label class="form-label" >
-                                                                  <strong>Mot de passe</strong>
-                                                              </label>
-                                                              <input class="form-control" type="password" name="password" placeholder="Mot de passe" value={{$user->password}}>
-                                                              @error('password')<span class="text-danger">{{ $message }}</span>@enderror
-                                                  
-                                                          </div>
-                                                      </div>
+                                                 
                                                       <div style="min-width: 30%;" class="col">
                                                           <div class="has-float-label mb-4">
                                                               <label class="form-label" >

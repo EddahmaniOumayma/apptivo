@@ -20,9 +20,9 @@ class CreateAdminUserSeeder extends Seeder
         $user = User::create([
 
             
-            'nom' =>'Eddahmani',
-            'prenom' =>'oumayma',
-            'email' =>'oumaymaeddahmani1@gmail.com',
+            'nom' =>'Admin',
+            'prenom' =>'Admin',
+            'email' =>'admin@gmail.com',
             'date_naissance' =>'2000-08-01',
             'lieu_naissance' =>'Tourirt',
             'sexe' =>'F',
@@ -38,16 +38,15 @@ class CreateAdminUserSeeder extends Seeder
     
         $role = Role::create(['name' => 'Admin']);
         $role2 = Role::create(['name' => 'Fonctionnaire']);
-        $role3 = Role::create(['name' => 'superAdmin']);
-     
+       
         $permissions = Permission::pluck('id','id')->all();
         $permissions2 = Permission::where('id',1)->pluck('id','id');
-        $permissions3 = Permission::where('id',1)->pluck('id','id');
+        
      
    
         $role->syncPermissions($permissions);                  
         $role2->syncPermissions($permissions2);
-        $role3->syncPermissions($permissions3);
+      
      
         $user->assignRole([$role->id]);
     }

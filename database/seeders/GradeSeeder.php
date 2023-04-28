@@ -16,27 +16,19 @@ class GradeSeeder extends Seeder
      */
     public function run()
     {
+        $cadreIds = DB::table('cadres')->pluck('id')->toArray();
 
+        $grades = [
+            ['libelle_g' => 'Technicien de 4éme grade', 'salaire_de_base' => 1000.00, 'besoin_concours' => false, 'cadre_id' => $cadreIds[0]   ,'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle_g' => 'Technicien de 3éme grade', 'salaire_de_base' => 1200.50, 'besoin_concours' => false, 'cadre_id' => $cadreIds[0],   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle_g' => 'Technicien de 2éme grade', 'salaire_de_base' => 1500.00, 'besoin_concours' => true, 'cadre_id' => $cadreIds[0],   'created_at' => now(),
+            'updated_at' => now(),],
+            ['libelle_g' => 'Technicien de 1er grade', 'salaire_de_base' => 1800.00, 'besoin_concours' => true, 'cadre_id' => $cadreIds[0],   'created_at' => now(),
+            'updated_at' => now(),],
+        ];
+        DB::table('grades')->insert($grades);
 
-$faker = FakerFactory::create();
-
-$cadreIds = DB::table('cadres')->pluck('id')->toArray();
-
-for ($i = 0; $i < 20; $i++) {
-    $libelle_g = $faker->unique()->jobTitle;
-    $salaire_de_base = $faker->randomFloat(2, 1000, 5000);
-    $besoin_concours = $faker->boolean;
-
-    $cadre_id = $faker->randomElement($cadreIds);
-
-    DB::table('grades')->insert([
-        'libelle_g' => $libelle_g,
-        'salaire_de_base' => $salaire_de_base,
-        'besoin_concours' => $besoin_concours,
-        'cadre_id' => $cadre_id,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
 }
-    }
 }

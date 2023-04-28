@@ -5,7 +5,7 @@
                     
         <div class="row card  shadow">
             <div class="card-header ">
-                <h3 class="text-gray-600 display-7">Ajouter Fonctionnaires</h3>
+                <h3 class="text-gray-600 display-7">Ajouter Fonctionnaire</h3>
             </div>
 
 
@@ -18,7 +18,7 @@
                     <!-- _______________ profile image start _______________ -->
                     <div class="row">
                       <div class="card-body  text-center">
-                          <img class="rounded-circle mb-2 " id="preview" src="{{asset('build/assets/img/images/profile.png')}}" alt="" width="140" height="140">
+                          <img class="rounded-circle mb-2 " id="preview" src="{{asset('build/assets/img/images/profile.jpg')}}" alt="" width="140" height="140">
                           <div class="mb-3">
                               <input type="file" id="myFileInput" onchange="previewImage(event); updateFileName()" name="image">
                               <label class="label_" for="myFileInput">photo<i  class="fa fa-upload mx-2"></i></label>
@@ -240,7 +240,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                   <center> <button class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" type="submit">&nbsp;Ajouter Fonctionnaires</button></center>
+                                   <center> <button class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" type="submit">&nbsp;Ajouter Fonctionnaire</button></center>
 
 
 
@@ -248,6 +248,9 @@
                                     
                                
                             </div>
+
+                </div>
+    </form>                      
    
     
   

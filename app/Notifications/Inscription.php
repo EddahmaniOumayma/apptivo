@@ -2,8 +2,9 @@
 
 namespace App\Notifications;
 
-use Barryvdh\DomPDF\PDF;
+
 use App\Models\User;
+use PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -45,23 +46,21 @@ class Inscription extends Notification
     public function toMail($notifiable)
     {
 
-        $data = [
-            'user' => $notifiable,
-            'message' => 'Félicitations, vous avez été promu au prochain indice de votre grade !',
-            'url' => url('/Profilef')
-        ];
+    
         
-        $pdf = \PDF::loadView('Fonctionnaire.InscriptionPdf',compact('data'));
-        $pathFile = storage_path('app/public/pdf/files/' .$notifiable->nom . '.pdf');   // Path To Save Pdf File
-        $file = $pdf->save($pathFile);  // Save Pdf File
+        $pdf=PDF::loadView('Fonctionnaire.InscriptionPdf',compact('notifiable')) ;
+        $pathFile = storage_path('app/public/pdf/files/' .$notifiable->nom . '.pdf');   
 
         return (new MailMessage)
         ->line('Salut ' . $notifiable->nom . ' ' . $notifiable->prenom . ',')
         ->line('vous avez le droit de passer le concour  d aggregation  pour promu au grade prochain!!')
-        ->action('Imprimer votre attestation d inscription', url('/apptivo.com'))
-        ->line('Merci !')
-        ->attachData($file->output(), "InscriptionPdf.pdf");
+        
+        ->attachData($pdf->output(), "InscriptionPdf.pdf")
+        ->line('Merci !');
+        
+        
     }
+
 
     public function toDatabase($notifiable)
     {
